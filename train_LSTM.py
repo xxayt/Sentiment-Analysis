@@ -55,7 +55,7 @@ def train():
     y_test_pred=(model.predict(x_test) > 0.5).astype("int32")
     print_history(history)
     compute_indexes(y_test, y_test_pred)
-    
+
 def print_history(history):
     #  使用history将训练集和测试集的loss和acc调出来
     acc = history.history['accuracy']  # 训练集准确率
@@ -78,16 +78,10 @@ def print_history(history):
     plt.savefig('./img/LSTM_acc_loss.png')
     plt.show()
     plt.clf()
-    
-    
-    
-    
 
-    # 计算常用指标
+# 计算常用指标
 def compute_indexes(y_test, y_test_pred):
-    
     print(classification_report(y_test, y_test_pred))
-    
     #混淆矩阵 
     cm = confusion_matrix(y_test, y_test_pred)
     df=pd.DataFrame(cm,index=["0", "1"],columns=["0", "1"])
@@ -105,8 +99,6 @@ def compute_indexes(y_test, y_test_pred):
     print("Precision: {:.4f}%".format(precision*100))
     print("Recall:    {:.4f}%".format(recall*100))
     print("F1:        {:.4f}%".format(F1*100))
-    
-
 
 
 if __name__ == '__main__':

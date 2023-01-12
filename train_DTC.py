@@ -31,7 +31,6 @@ def train():
     # 词向量初始化
     df = pd.read_csv(waimai_cut_path, header=None)
     print(df)
-    
     '''
     sentences = df.iloc[:, 1].astype("str").map(lambda x: x.split(" "))
     #word2vec
@@ -80,11 +79,10 @@ def train():
     # 保存模型
     joblib.dump(model_dtc, model_path_DTC)
     compute_indexes(y_test,y_pred)
-    
+
 # 计算常用指标
 def compute_indexes(y_test, y_test_pred):
     print(classification_report(y_test, y_test_pred))
-
     #混淆矩阵 
     cm = confusion_matrix(y_test, y_test_pred)
     df=pd.DataFrame(cm,index=["0", "1"],columns=["0", "1"])
@@ -92,7 +90,6 @@ def compute_indexes(y_test, y_test_pred):
     plt.savefig('./img/DTC_confusion_matrix.png')
     print(cm)
     tp,fp,fn,tn=cm[0][0],cm[0][1],cm[1][0],cm[1][1]
-    
     #常用指标
     accuracy = (tp+tn) / (tp+tn+fp+fn)     # 准确率
     precision = tp / (tp+fp)               # 精确率
